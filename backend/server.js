@@ -1,7 +1,12 @@
 import express from 'express'
+import productRoutes from './routes/productRoutes.js'
 
 const port = 8080;
 const app = express();
+
+// routes 
+
+app.use("/api/products", productRoutes)
 
 app.get("/", (req, res) => res.send("Api is running"))
 
