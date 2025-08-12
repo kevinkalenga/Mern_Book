@@ -1,6 +1,6 @@
-import asyncHandler from "../middleware/asyncHandler";
-import User from "../model/userModel";
-import generateToken from "../utils/generateToken";
+import asyncHandler from "../middleware/asyncHandler.js";
+import User from "../model/userModel.js";
+import generateToken from "../utils/generateToken.js";
 import validator from 'validator'
 
 // sign in user 
