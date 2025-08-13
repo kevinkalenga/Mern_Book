@@ -149,20 +149,21 @@ const getUsers = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
 
-    if (user) {
-        if (user.isAdmin) {
-            res.status(400);
-        } else {
-            throw new Error('Can not delete admin user')
-        }
-
-        await User.deleteOne({ _id: user._id });
-        res.status(200).json({ message: 'User deleted successfully' })
-    } else {
+    if (!user) {
         res.status(404);
         throw new Error('User not found');
     }
-})
+
+    // Empêche de supprimer un admin
+    if (user.isAdmin) {
+        res.status(400);
+        throw new Error('Cannot delete admin user');
+    }
+
+    await User.deleteOne({ _id: user._id });
+
+    res.status(200).json({ message: 'User deleted successfully' });
+});
 
 // private admin 
 const getUserById = asyncHandler(async (req, res) => {
@@ -180,31 +181,42 @@ const getUserById = asyncHandler(async (req, res) => {
 const updateUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
 
-    
-    
-    if (user) {
-        if(req.body.email && !validator.isEmail(req.body.email)) {
-            res.status(400);
-            throw new Error("Invalid email address")
-        }
-        user.name = req.body.name || user.name;
-        user.email = req.body.email || user.email;
-        user.isAdmin = Boolean(req.body.isAdmin);
-
-        const updateUser = await user.save();
-
-        res.status(200).json({
-            _id: updateUser._id,
-            name: updateUser.name,
-            email: updateUser.email,
-            isAdmin: updateUser.isAdmin
-        })
-    } else {
+    if (!user) {
         res.status(404);
         throw new Error('User not found');
     }
 
-})
+    // Validation email si fourni
+    if (req.body.email && !validator.isEmail(req.body.email)) {
+        res.status(400);
+        throw new Error("Invalid email address");
+    }
+
+    // Si c'est un admin et que tu veux empêcher sa rétrogradation
+    if (user.isAdmin && req.body.isAdmin === false) {
+        res.status(400);
+        throw new Error("Cannot remove admin privileges from this user");
+    }
+
+    // Mise à jour des champs
+    user.name = req.body.name ?? user.name;
+    user.email = req.body.email ?? user.email;
+
+    // Mise à jour isAdmin seulement si fourni (et si tu l’autorises)
+    if (typeof req.body.isAdmin !== "undefined") {
+        user.isAdmin = Boolean(req.body.isAdmin);
+    }
+
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        isAdmin: updatedUser.isAdmin
+    });
+});
+
 
 export {
     authUser,
