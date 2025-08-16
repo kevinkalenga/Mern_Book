@@ -55,6 +55,42 @@ function Header() {
                         </Link>
                     )
                  }
+                 {
+                    userInfo && userInfo.isAdmin && (
+                        <div className='relative'>
+                            <button 
+                              onClick={() =>setAdminOpen(!adminOpen)}
+                              className='flex items-center gap-1 
+                                border-gray-500 rounded-md hover:border-gray-500 
+                                hover:bg-gray-100 hover:text-black transition-all p-1 max-mid:mx-2'>
+                                {userInfo.name.split(" ")[0]}
+                                <FachevronDown className="mt-0.5" />
+                            </button>
+                            {
+                                adminOpen && (
+                                    <div className='absolute right-0 mt-2 w-48 bg-white text-gray-700 shadow-lg rounded-lg z-50'>
+                                        <Link className='block px-4 py-2 hover:bg-gray-100' to="/admin/productlist" onClick={()=>setAdminOpen(false)}>
+                                          Product
+                                        </Link>
+                                        <Link to="/admin/orderlist" className='block px-4 py-2 hover:bg-gray-100' onClick={()=>setAdminOpen(false)}>
+                                          Orders
+                                        </Link>
+                                        <Link to="/admin/userlist" className='block px-4 py-2 hover:bg-gray-100' onClick={()=>setAdminOpen(false)}>
+                                           Users
+                                        </Link>
+                                    </div>
+                                )
+                            }
+                        </div>
+                    )
+                 }
+                 {
+                   userInfo ? (
+                     <Link onClick={logoutHandler} className='p-2'>
+                         <FaSignoutAlt />
+                     </Link>
+                   ) : ("")
+                 }
           </div>
         </div>
     </header>
