@@ -36,7 +36,7 @@ import { FaEye } from "react-icons/fa";
             </div>
             <Link to={`/product/${product._id}`} 
                className="flex items-center 
-               justify-center gap-2 w-full rounded-lg bg-white border-2
+               justify-center gap-2 py-2 w-full rounded-lg bg-white border-2
                 border-primary font-semibold transition hover:bg-primary hover:text-white">
                     <FaEye size={20}  /> Preview
             </Link>

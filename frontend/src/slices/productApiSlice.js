@@ -1,3 +1,4 @@
+// import { PRODUCTS_URL } from "../constants.js";
 import { PRODUCTS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
@@ -8,7 +9,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                 url: PRODUCTS_URL,
                 params: {
                     keyword,
-                    pageNumber,
+                    pageNumber, 
                 }
             }),
             providesTags: ['Product'],

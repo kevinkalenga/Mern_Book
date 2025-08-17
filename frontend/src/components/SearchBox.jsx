@@ -1,27 +1,25 @@
-import React, {useState} from 'react'
 
-function SearchBox({onSearch}) {
-  
-    const [keyword, setKeyword] = useState("")
-  
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setKeyword(value)
-        onSearch(value)
-    }
-    
-    return (
-     <form className='flex items-center justify-center mb-5'>
-          <input 
-            type="text" 
-            name='search' 
-            onChange={handleChange} 
-            value={keyword}
-            placeholder='Search Books...'
-            className='p-2 border border-orange-300 rounded-2xl focus:outline-none focus:ring-secondary w-70'
-            />
-     </form>
-  )
+function SearchBox({ keyword, onChange, onSearch }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch();
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="flex items-center gap-2">
+      <input
+        type="text"
+        value={keyword}
+        onChange={onChange}
+        placeholder="Rechercher un produit..."
+        className="border p-2 rounded flex-1"
+      />
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        Rechercher
+      </button>
+    </form>
+  );
 }
 
 export default SearchBox;
+
