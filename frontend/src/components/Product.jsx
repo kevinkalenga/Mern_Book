@@ -1,12 +1,7 @@
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import { FaEye } from "react-icons/fa";
-/*
-flex flex-col w-full max-w-[250px] sm:max-w-[220px] md:max-w-[200px] lg:max-w-[180px] 
-                    overflow-hidden rounded-2xl border border-gray-300 shadow-lg 
-                    transition-transform hover:scale-105 hover:shadow-xl
-
-*/ 
+ 
 
 function Product({ product }) {
   return (
@@ -34,10 +29,11 @@ function Product({ product }) {
             ${product.price}
           </span>
           <div className="flex items-center space-x-1">
-            <Rating value={product.rating} text={`${product.numReviews} reviews`} />
             <span className="ml-1 rounded bg-yellow-200 px-2 py-0.5 text-xs font-semibold">
               {product.rating}
             </span>
+            <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+            
           </div>
         </div>
 
