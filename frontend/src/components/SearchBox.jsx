@@ -1,20 +1,23 @@
-
-function SearchBox({ keyword, onChange, onSearch }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSearch();
-  };
-
+function SearchBox({ keyword, setKeyword, onSearch }) {
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2">
+    <form
+      className="flex flex-col sm:flex-row items-center mb-4 w-full sm:w-auto"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSearch();
+      }}
+    >
       <input
         type="text"
         value={keyword}
-        onChange={onChange}
-        placeholder="Rechercher un produit..."
-        className="border p-2 rounded flex-1"
+        onChange={(e) => setKeyword(e.target.value)}
+        placeholder="Rechercher..."
+        className="flex-1 px-4 py-2 border rounded-md mb-2 sm:mb-0 sm:mr-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+      <button
+        type="submit"
+        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+      >
         Rechercher
       </button>
     </form>
@@ -22,4 +25,3 @@ function SearchBox({ keyword, onChange, onSearch }) {
 }
 
 export default SearchBox;
-

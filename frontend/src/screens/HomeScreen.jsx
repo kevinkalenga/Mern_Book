@@ -11,17 +11,15 @@ function HomeScreen() {
   const { pageNumber: pageParam, keyword: urlKeyword } = useParams();
   const navigate = useNavigate();
 
-  // State pour la recherche
   const [keyword, setKeyword] = useState(urlKeyword || "");
   const pageNumber = pageParam || 1;
 
-  // Hook RTK Query pour récupérer les produits
   const { data, isLoading, error } = useGetProductsQuery({
     keyword: urlKeyword || "",
     pageNumber,
   });
+  console.log(data)
 
-  // Fonction de recherche
   const handleSearch = () => {
     if (keyword.trim()) {
       navigate(`/search/${keyword.trim()}/page/1`);
@@ -42,10 +40,10 @@ function HomeScreen() {
         <div className="px-4 py-6">
           <SearchBox
             keyword={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            setKeyword={setKeyword} // <-- il faut passer setKeyword
             onSearch={handleSearch}
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6 md:gap-8 gap-4 justify-items-center">
             {data?.products?.map((product) => (
               <Product key={product._id} product={product} />
             ))}
@@ -58,4 +56,3 @@ function HomeScreen() {
 }
 
 export default HomeScreen;
-
