@@ -10,6 +10,9 @@ export default {
         primary: "#1d4ed8",   // exemple bleu
         secondary: "#9333ea", // exemple violet
       },
+       backdropBlur: {
+        xs: '2px', // 👈 nouvelle classe
+      },
     },
   },
   plugins: [],
