@@ -8,6 +8,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser';
 
 
+
 const port = process.env.PORT || 8081;
 
 connectDB(); // Connect to MongoDB
@@ -19,6 +20,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
+
 
 // routes 
 

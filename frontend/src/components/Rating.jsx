@@ -1,4 +1,4 @@
-import { FaStar, FaStarHalf, FaRegStar } from "react-icons/fa"
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"
 
 function Rating({value, text}) {
   return (
@@ -9,8 +9,8 @@ function Rating({value, text}) {
                    {
                      value >= i ? (
                        <FaStar size={15}/>
-                     ) : value >= 1 - 0.5 ? (
-                        <FaStarHalf size={15} />
+                     ) : value >= i - 0.5 ? (
+                        <FaStarHalfAlt size={15} />
                      ): (
                         <FaRegStar size={15} />
                      )

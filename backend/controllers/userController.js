@@ -13,11 +13,15 @@ const authUser = asyncHandler(async(req, res) => {
     if(user && (await user.matchPassword(password))) {
         generateToken(res, user._id)
 
+         // Renvoie aussi le token dans la réponse JSON
+        // const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "30d" });
+
         res.json({
             _id: user._id,
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
+            
         })
     } else {
         res.status(404)

@@ -29,6 +29,7 @@ function LoginScreen() {
     const redirect = sp.get("redirect") || "/"
 
     useEffect(() => {
+        console.log("Redux userInfo:", userInfo);
         if(userInfo) {
             navigate(redirect)
         }
@@ -40,6 +41,7 @@ function LoginScreen() {
 
         try {
             const res = await login({email, password}).unwrap()
+             console.log("Login API response:", res)
             dispatch(setCredentials({...res}))
             navigate(redirect)
         } catch (error) {
@@ -62,7 +64,7 @@ function LoginScreen() {
                        py-2 border border-gray-300 rounded-md 
                        focus:outline-none focus:right-2 focus:ring-2 focus:ring-primary"
                     value={email} 
-                    onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
+                    onChange={(e) => setEmail(e.target.value)} placeholder="Enter Email"/>
             </div>
             <div className="space-y-2 relative">
                 <label htmlFor="password" className="block tex-sm font-meduim text-gray-700">Password</label>
