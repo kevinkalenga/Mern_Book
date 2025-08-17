@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen.jsx'
 import ProductScreen from './screens/ProductScreen.jsx'
+import LoginScreen from './screens/LoginScreen.jsx'
 
 const router = createBrowserRouter(
    createRoutesFromElements(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
               <Route path='/search/:keyword' element={<HomeScreen />} />
               <Route path='/search/:keyword/page/:pageNumber' element={<HomeScreen />} />
               <Route path='/product/:id' element={<ProductScreen />} />
+              <Route path='/login' element={<LoginScreen />} />
          </Route>
 
    )

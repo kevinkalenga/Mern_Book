@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom"
 import {useDispatch, useSelector} from 'react-redux'
 import Loader from "../components/Loader";
-import {useLoginMutation, setCredentials} from '../slices/authSlice'
+import {useLoginMutation} from '../slices/usersApiSlice'
 import {toast} from 'react-toastify'
 import {FaEyeSlash, FaEye} from 'react-icons/fa6'
+import { setCredentials } from "../slices/authSlice";
+import FormContainer from "../components/FormContainer";
 
 
 import React from 'react'
@@ -51,7 +53,55 @@ function LoginScreen() {
     
     
     return (
-    <div>LoginScreen</div>
+    <FormContainer>
+        <h1 className="text-2xl font-semibold mb-4 mt-5">Sign In</h1>
+        <form className="space-y-4" onSubmit={submitHandler}>
+            <div className="space-y-2">
+                <label htmlFor="email" className="block tex-sm font-meduim text-gray-700">Email Address</label>
+                <input type="email" id="email" className="w-full px-3
+                       py-2 border border-gray-300 rounded-md 
+                       focus:outline-none focus:right-2 focus:ring-2 focus:ring-primary"
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
+            </div>
+            <div className="space-y-2 relative">
+                <label htmlFor="password" className="block tex-sm font-meduim text-gray-700">Password</label>
+                <input type={showPassword ? "text":"password"} id="password" className="w-full px-3
+                       py-2 border border-gray-300 rounded-md 
+                       focus:outline-none focus:right-2 focus:ring-2 focus:ring-primary"
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password"/>
+                
+                 <button 
+                   type="button"
+                   onClick={togglePasswordVisibility}
+                   className="absolute inset-y-0 right-2 top-5 text-primary"
+                   >
+                     {
+                        showPassword ? <FaEyeSlash /> : <FaEye />
+                     }
+                 </button>
+            </div>
+            <button 
+              disabled={isLoading} 
+              type="submit" 
+               className="w-full bg-primary
+                text-white py-2 px-2 rounded-md hover:bg-secondary 
+                focus:outline-none focus:ring-2 focus:ring-secondary">
+                     Sign In
+            </button>
+            {
+                isLoading && <Loader />
+            }
+        </form>
+        <div className="py-3">
+           <p>
+            New User ? <Link className="text-primary hover:text-secondary" to={redirect ? `register?redirect=${redirect}`:'/register' }>
+               Register
+            </Link>
+           </p>
+        </div>
+    </FormContainer>
   )
 }
 export default LoginScreen
