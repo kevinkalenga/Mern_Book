@@ -49,8 +49,53 @@ function ProductScreen() {
   };
     
     
-      return (
-    <div>ProductScreen</div>
+    return (
+    
+     <div className="max-w-6xl mx-auto p-6">
+        <Link to="/">
+           <IoChevronBackCirlcleSharp size={35} className="text-primary hover:text-secondary"  />
+        </Link>
+        {
+            isLoading? (
+                <Loader />
+            ):error ? (
+                <Message variant="danger">
+                    {error?.data?.message || error.error}
+                </Message>
+            ):(
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                   <div className="lg:col-span-1">
+                      <img src={product.image} alt={product.image} className="w-full rounded-lg shadow-lg" />
+                   </div>
+                   <div className="lg:col-span-1">
+                          <h1 className="text-3xl font-bold text-gray-900 border-b border-gray-300 pb-4">
+                            {product.name}
+                          </h1>
+                   </div>
+                   <div className="mt-4 border-b border-gray-300 pb-4">
+                      <Rating value={product.rating} text={`${product.numReviews} Reviews`} />
+                   </div>
+                   <p className="mt-4 text-gray-700">{product.description}</p>
+                   <div className="lg:col-span-1">
+                        <div className="bg-white p-6 rounded-lg shadow-md">
+                            <div className="space-y-4">
+                               <p className="flex justify-between text-lg">
+                                 <span className="text-gray-600">Price:</span>
+                                 <span className="font-semibold">${product.price}</span>
+                               </p>
+                               <p className="flex justify-between text-lg">
+                                  <span className="text-gray-600">Status</span>
+                                  <span className={`${product.countInStock > 0 ? "text-green-600" : "text-red-600"}`}>
+                                      {product.countInStock > 0 ? "In Stock" : "Out of stock"}
+                                  </span>
+                               </p>
+                            </div>
+                        </div>
+                   </div>
+               </div>
+            )
+        }
+     </div>
   )
 }
 
