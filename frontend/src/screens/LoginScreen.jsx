@@ -29,7 +29,7 @@ function LoginScreen() {
     const redirect = sp.get("redirect") || "/"
 
     useEffect(() => {
-        console.log("Redux userInfo:", userInfo);
+        
         if(userInfo) {
             navigate(redirect)
         }
@@ -41,7 +41,7 @@ function LoginScreen() {
 
         try {
             const res = await login({email, password}).unwrap()
-             console.log("Login API response:", res)
+            
             dispatch(setCredentials({...res}))
             navigate(redirect)
         } catch (error) {

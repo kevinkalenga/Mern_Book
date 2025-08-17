@@ -6,6 +6,7 @@ import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 
 
@@ -29,4 +30,9 @@ app.use("/api/users", userRoutes)
 
 app.get("/", (req, res) => res.send("Api is running"))
 
+
+app.use(notFound);
+app.use(errorHandler);
+
 app.listen(port, () => console.log(`Server is running on port ${port}!!!`))
+
