@@ -89,7 +89,65 @@ function ProductScreen() {
                                       {product.countInStock > 0 ? "In Stock" : "Out of stock"}
                                   </span>
                                </p>
+                               {
+                                product.countInStock > 0 && (
+                                    <div className="mt-4">
+                                         <label htmlFor="qty" className="block text-gray-700 font-semibold mb-2">Quantity</label>
+                                         <select name="" id="qty" className="w-full border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" value={qty} onChange={(e) => setQty(Number(e.target.value()))}>
+                                             {
+                                                [...Array(product.countInStock).keys()].map((x) => {
+                                                    <option key={x + 1} value={x + 1}>
+                                                        {" "}
+                                                        {x + 1}
+                                                    </option>
+                                                })
+                                             }
+                                         </select>
+                                    </div> 
+
+                                )
+                               }
+                               <button className={`w-full mt-6 py-3 rounded-lg font-semibold ${
+                                 product.countInStock === 0 ? "bg-gray-300 cursor-not-allowed" : 
+                                  "bg-primary hover:bg-secondary text-white"
+                               }`} disabled={product.countInStock === 0}>
+                                   Add To Cart
+                               </button>
                             </div>
+                        </div>
+                        <div className="mt-8">
+                           <h2 className="text-2xl font-bold text-gray-900">Reviews</h2>
+                           {
+                            product.review.length === 0 ? (<Message>No Reviews</Message>) : (
+                                <div className="mt-6 space-y-5">
+                                    {
+                                        product.reviews.map((review) => (
+                                            <div className="bg-white p-6 rounded-lg shadow-sm" key={review._id}>
+                                               <div className="flex items-center space-x-4">
+                                                  <strong className="text-gray-900">
+                                                     {review.name}
+                                                  </strong>
+                                                  <Rating value={review.rating} />
+                                                  <p className="text-sm text-gray-500">
+                                                    {review.createdAt.subString(0,10)}
+                                                  </p>
+                                               </div>
+                                               <p className="mt-2 text-gray-700">{review.comment}</p>
+                                            </div>
+                                        ))
+                                    }
+
+                                </div>
+                            )
+                           }
+                           {
+                            userInfo && !isOpen && (
+                                <button className="w-48 py-2 bg-primary text-white 
+                                  rounded-lg font-semibold hover:bg-secondary mt-6" onClick={()=>setIsOpen(true)}>
+                                      Add a Review
+                                  </button>
+                            )
+                           }
                         </div>
                    </div>
                </div>
