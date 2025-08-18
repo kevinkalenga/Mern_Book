@@ -11,9 +11,11 @@ import {
   FaSignOutAlt,
   FaTimes,
 } from 'react-icons/fa';
+import { resetCart } from '../slices/cartSlice';
 
 function Header() {
   const { userInfo } = useSelector((state) => state.auth);
+  const {cartItems} = useSelector((state) => state.cart)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [logoutApiCall] = useLogoutMutation();
@@ -24,6 +26,7 @@ function Header() {
     try {
       await logoutApiCall().unwrap();
       dispatch(logout());
+      dispatch(resetCart())
       navigate('/login');
     } catch (error) {
       console.log(error);
@@ -63,6 +66,19 @@ function Header() {
             className="relative flex items-center gap-2 p-2 md:p-0"
           >
             <FaShoppingCart /> Cart
+            {
+              cartItems.length > 0 && (
+                <span className='absolute -top-2 -right-2
+                   bg-gray-500 text-white text-xs w-4 h-4
+                    flex items-center justify-center 
+                    rounded-full max-sm:left-12 max-sm:top-0'>
+                      {
+                        cartItems.reduce((a, c) => a + c.qty, 0)
+                      }
+
+                </span>
+              )
+            }
           </Link>
 
           {/* User / Sign in */}

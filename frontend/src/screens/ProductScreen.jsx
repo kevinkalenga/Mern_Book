@@ -8,6 +8,7 @@ import Rating from "../components/Rating";
 import Message from "../components/Message";
 import {IoChevronBackCircleSharp} from 'react-icons/io5'
 import { FaWindowClose } from "react-icons/fa";
+import { addToCart } from "../slices/cartSlice";
 
 
 
@@ -48,6 +49,10 @@ function ProductScreen() {
     }
   };
     
+  const addToCartHandler = () => {
+     dispatch(addToCart({...product, qty}))
+     navigate("/cart")
+  }
     
     return (
     
@@ -113,7 +118,7 @@ function ProductScreen() {
                                <button className={`w-full mt-6 py-3 rounded-lg font-semibold ${
                                  product.countInStock === 0 ? "bg-gray-300 cursor-not-allowed" : 
                                   "bg-primary hover:bg-secondary text-white"
-                               }`} disabled={product.countInStock === 0}>
+                               }`} disabled={product.countInStock === 0} onClick={addToCartHandler}>
                                    Add To Cart
                                </button>
                             </div>
