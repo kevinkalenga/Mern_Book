@@ -5,45 +5,41 @@ import { FaEye } from "react-icons/fa";
 
 function Product({ product }) {
   return (
-    <div className="bg-white md:w-[330px] shadow-md hover:shadow-lg 
-      transition-transform overflow-hidden rounded-lg w-full sm:w-[300px] hover:scale-105">
+
+    <div className="relative flex w-full max-w-xs flex-col overflow-hidden rounded-2xl border border-gray-300 shadow-lg transition-transform hover:scale-102 hover:shadow-xl">
       <Link to={`/product/${product._id}`}>
-        <img 
-          src={product.image} 
-          alt={product.name} 
-          className="w-full aspect-square object-cover rounded-t-2xl"
+        <img
+          className="h-56 w-full object-center"
+          src={product.image}
+          alt={product.name}
         />
       </Link>
-
-      <div className="p-3 space-y-2">
-        <Link 
-          to={`/product/${product._id}`} 
-          className="block text-sm md:text-base font-semibold text-gray-900 hover:text-primary 
-                     overflow-hidden text-ellipsis whitespace-nowrap"
+      <div className="p-4 space-y-3">
+        <Link
+          to={`/product/${product._id}`}
+          className="block text-lg font-semibold text-gray-900 hover:text-primary underline overflow-hidden text-ellipsis whitespace-nowrap"
         >
           {product.name}
         </Link>
-
         <div className="flex items-center justify-between">
-          <span className="text-sm md:text-base font-bold text-gray-800">
+          <span className="text-lg font-bold text-gray-800">
             ${product.price}
           </span>
           <div className="flex items-center space-x-1">
-            <span className="ml-1 rounded bg-yellow-200 px-2 py-0.5 text-xs font-semibold">
+            <span className="ml-2 rounded bg-yellow-200 px-2 py-0.5 text-xs font-semibold">
               {product.rating}
             </span>
-            <Rating value={product.rating} text={`${product.numReviews} reviews`} />
-            
+            <Rating
+              value={product.rating}
+              text={`${product.numReviews} reviews`}
+            />
           </div>
         </div>
-
-        <Link 
-          to={`/product/${product._id}`} 
-          className="flex items-center justify-center gap-2 py-2 w-full rounded-lg 
-                     bg-white border-2 border-primary font-semibold text-sm transition 
-                     hover:bg-primary hover:text-white"
+        <Link
+          to={`/product/${product._id}`}
+          className="flex items-center justify-center gap-2 py-2 w-full rounded-lg bg-white border-2 border-primary font-semibold transition hover:bg-primary hover:text-white"
         >
-          <FaEye size={18} /> Preview
+          <FaEye size={20} /> Preview
         </Link>
       </div>
     </div>

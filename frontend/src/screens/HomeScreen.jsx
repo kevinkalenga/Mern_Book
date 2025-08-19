@@ -29,6 +29,8 @@ function HomeScreen() {
   };
 
   return (
+
+
     <>
       {isLoading ? (
         <Loader />
@@ -38,17 +40,13 @@ function HomeScreen() {
         </Message>
       ) : (
         <div className="px-4 py-6">
-          <SearchBox
-            keyword={keyword}
-            setKeyword={setKeyword} // <-- il faut passer setKeyword
-            onSearch={handleSearch}
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6 md:gap-8 gap-4 justify-items-center">
+          <SearchBox onSearch={handleSearch} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {data?.products?.map((product) => (
               <Product key={product._id} product={product} />
             ))}
           </div>
-          <Pagination page={data?.page} pages={data?.pages} keyword={urlKeyword || ""} />
+          <Pagination page={data?.page} pages={data?.pages} />
         </div>
       )}
     </>
