@@ -2,7 +2,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Order from "../model/orderModel.js";
 
 import Product from "../model/productModel.js";
-import { calcPrices } from "../utils/calcPrices.js";
+import { calcPrices} from "../utils/calcPrice.js";
 import { verifyPaPalPayment, checkIfNewTransaction } from "../utils/paypal.js"; 
 
 const addOrderItems = asyncHandler(async (req, res) => {
