@@ -7,6 +7,7 @@ import userRoutes from './routes/userRoutes.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import orderRoutes from "./routes/orderRoutes.js";
 
 
 
@@ -26,7 +27,13 @@ app.use(cookieParser())
 // routes 
 
 app.use("/api/products", productRoutes)
+app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes)
+
+// PayPal route
+app.get("/api/config/paypal", (req, res) =>
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
+);
 
 app.get("/", (req, res) => res.send("Api is running"))
 
