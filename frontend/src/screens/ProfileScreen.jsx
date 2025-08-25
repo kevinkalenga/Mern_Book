@@ -8,6 +8,7 @@ import {useProfileMutation} from '../slices/usersApiSlice'
 import { useGetMyOrderQuery } from "../slices/ordersApiSlice"
 import { setCredentials } from "../slices/authSlice"
 import { Link } from "react-router-dom"
+import Loader from "../components/Loader"
 
 function ProfileScreen() {
   
@@ -59,7 +60,110 @@ function ProfileScreen() {
   
   
     return (
-    <div>ProfileScreen</div>
+    <div className="container mx-auto my-5">
+        <div className="flex space-x-4 mb-4">
+           <button className={`px-4 py-2 hover:bg-secondary ${
+             activeTab === 'profile' ? "bg-primary text-white":"bg-gray-200"
+             
+           }`} onclick={()=> setActiveTab("profile")}>
+                User Profile
+           </button>
+           <button className={`px-4 py-2 hover:bg-secondary ${
+             activeTab === 'orders' ? "bg-primary text-white":"bg-gray-200"
+             
+           }`} onClick={() => setActiveTab("orders")}>
+               My orders
+           </button>
+        </div>
+         <FormContainer>
+            {
+                activeTab === "profile" && (
+                    <div className="bg-white rounded-lg shadow-md">
+                       <h2 className="text-2xl font-bold mb-4">User Prifle</h2>
+                       <form onSubmit={submitHandler} className="space-y-4">
+                           <div>
+                              <label className="block text-sm font-medium text-gray-700">Name</label>
+                              <input 
+                                type="text" 
+                                placeholder="Enter name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value())}
+                                className="mt-1 block w-full py-2 border
+                                 border-gray-300 rounded-md shadow-sm focus:outline-none
+                                  focus:ring-primary focus:border-primary"
+                              />
+                           </div>
+                           <div>
+                              <label className="block text-sm font-medium text-gray-700">Email Address</label>
+                              <input 
+                                type="email" 
+                                placeholder="Enter email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value())}
+                                className="mt-1 block w-full py-2 border
+                                 border-gray-300 rounded-md shadow-sm focus:outline-none
+                                  focus:ring-primary focus:border-primary"
+                              />
+                           </div>
+                           <div className="relative">
+                              <label className="block text-sm font-medium text-gray-700">Password</label>
+                              <input 
+                                type={showPassword ? 'text': 'password'} 
+                                placeholder="Enter Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value())}
+                                className="mt-1 block w-full py-2 border
+                                 border-gray-300 rounded-md shadow-sm focus:outline-none
+                                  focus:ring-primary focus:border-primary"
+                              />
+                              <button
+                              type="button"
+                              onClick={togglePasswordVisibility}
+                              className="absolute inset-y-0 right-2 top-6 text-primary"
+                              >
+                                {
+                                    showPassword ? <FaEyeSlash /> : <FaEye />
+                                }
+                              </button>
+                           </div>
+                           <div className="relative">
+                              <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
+                              <input 
+                                type={showConfirmPassword ? 'text': 'password'} 
+                                placeholder="Confirm password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value())}
+                                className="mt-1 block w-full py-2 border
+                                 border-gray-300 rounded-md shadow-sm focus:outline-none
+                                  focus:ring-primary focus:border-primary"
+                              />
+                              <button
+                              type="button"
+                              onClick={toggleConfirmPasswordVisibility}
+                              className="absolute inset-y-0 right-2 top-6 text-primary"
+                              >
+                                {
+                                    showConfirmPassword ? <FaEyeSlash /> : <FaEye />
+                                }
+                              </button>
+                           </div>
+                           <button 
+                             type="submit"
+                             className="w-full justify-center py-2 px-4 border
+                              border-transparent rounded-md shadow-sm 
+                              text-sm font-medium text-white bg-primary
+                               hover:bg-secondary focus:outline-none focus:ring-2 
+                               focus:ring-offset-2 focus:ring-primary"
+                            >
+                               Update
+                           </button>
+                           {loadingUpdateProfile && <Loader />}
+                       </form>
+                    </div>
+                )
+            }
+         </FormContainer>
+    </div>
   )
 }
 
