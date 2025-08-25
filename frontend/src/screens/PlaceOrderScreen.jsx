@@ -70,8 +70,8 @@ function PlaceOrderScreen() {
                      {cart.cartItems.length === 0 ? (<Message>Your cart is empty</Message>):(
                         <div className="space-y-4">
                             {
-                                cart.cartItems.map((item, index) => (
-                                    <div className="flex flex-col sm:flex-row
+                                cart.cartItems.map((item) => (
+                                    <div key={item._id} className="flex flex-col sm:flex-row
                                      items-start sm:items-center p-4 rounded-lg hover:bg-gray-50 transition-colors">
                                         <div className="w-20 h-20 flex-shrink-0 mb-4 sm:mb-0">
                                            <img src={item.image}
@@ -125,7 +125,7 @@ function PlaceOrderScreen() {
                     </div>
                     {error && (
                         <div className="mt-6">
-                           <Message variant="danger">{error.data.message}</Message>
+                           <Message variant="danger">{error.data?.message}</Message>
                         </div>
                     )}
                     <div className="mt-8">
