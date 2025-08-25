@@ -10,6 +10,7 @@ import { setCredentials } from "../slices/authSlice"
 import { Link } from "react-router-dom"
 import Loader from "../components/Loader"
 
+
 function ProfileScreen() {
   
       const [name, setName] = useState("")
@@ -42,7 +43,8 @@ function ProfileScreen() {
       const submitHandler = async (e) => {
          e.preventDefault()
          if(password !== confirmPassword) {
-            toast.error = ("Password do not match")
+            toast.error("Password do not match")
+            return
          } else {
             try {
                 const res = await updateProfile({
@@ -63,13 +65,13 @@ function ProfileScreen() {
     <div className="container mx-auto my-5">
         <div className="flex space-x-4 mb-4">
            <button className={`px-4 py-2 hover:bg-secondary ${
-             activeTab === 'profile' ? "bg-primary text-white":"bg-gray-200"
+             activeTab === "profile" ? "bg-primary text-white":"bg-gray-200"
              
-           }`} onclick={()=> setActiveTab("profile")}>
+           }`} onClick={()=> setActiveTab("profile")}>
                 User Profile
            </button>
            <button className={`px-4 py-2 hover:bg-secondary ${
-             activeTab === 'orders' ? "bg-primary text-white":"bg-gray-200"
+             activeTab === "orders" ? "bg-primary text-white":"bg-gray-200"
              
            }`} onClick={() => setActiveTab("orders")}>
                My orders
@@ -78,7 +80,7 @@ function ProfileScreen() {
          <FormContainer>
             {
                 activeTab === "profile" && (
-                    <div className="bg-white rounded-lg shadow-md">
+                    <div className="bg-white rounded-lg shadow-md p-6">
                        <h2 className="text-2xl font-bold mb-4">User Prifle</h2>
                        <form onSubmit={submitHandler} className="space-y-4">
                            <div>
@@ -87,10 +89,10 @@ function ProfileScreen() {
                                 type="text" 
                                 placeholder="Enter name"
                                 value={name}
-                                onChange={(e) => setName(e.target.value())}
+                                onChange={(e) => setName(e.target.value)}
                                 className="mt-1 block w-full py-2 border
                                  border-gray-300 rounded-md shadow-sm focus:outline-none
-                                  focus:ring-primary focus:border-primary"
+                                  focus:ring-primary focus:border-primary px-3"
                               />
                            </div>
                            <div>
@@ -99,10 +101,10 @@ function ProfileScreen() {
                                 type="email" 
                                 placeholder="Enter email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value())}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="mt-1 block w-full py-2 border
                                  border-gray-300 rounded-md shadow-sm focus:outline-none
-                                  focus:ring-primary focus:border-primary"
+                                  focus:ring-primary focus:border-primary px-3"
                               />
                            </div>
                            <div className="relative">
@@ -111,10 +113,10 @@ function ProfileScreen() {
                                 type={showPassword ? 'text': 'password'} 
                                 placeholder="Enter Password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value())}
+                                onChange={(e) => setPassword(e.target.value)}
                                 className="mt-1 block w-full py-2 border
                                  border-gray-300 rounded-md shadow-sm focus:outline-none
-                                  focus:ring-primary focus:border-primary"
+                                  focus:ring-primary focus:border-primary px-3"
                               />
                               <button
                               type="button"
@@ -132,10 +134,10 @@ function ProfileScreen() {
                                 type={showConfirmPassword ? 'text': 'password'} 
                                 placeholder="Confirm password"
                                 value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value())}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
                                 className="mt-1 block w-full py-2 border
                                  border-gray-300 rounded-md shadow-sm focus:outline-none
-                                  focus:ring-primary focus:border-primary"
+                                  focus:ring-primary focus:border-primary px-3"
                               />
                               <button
                               type="button"
@@ -159,10 +161,88 @@ function ProfileScreen() {
                            </button>
                            {loadingUpdateProfile && <Loader />}
                        </form>
+                       
                     </div>
                 )
             }
          </FormContainer>
+         {
+             activeTab === "orders" && (
+                            <div className="bg-white p-6 rounded-lg shadow-md">
+                                <h2 className="text-2xl font-bold mb-4">My Orders</h2>
+                                {
+                                    isLoading? (<Loader />):error?(<Message>
+                                        {error?.data?.message || error.error}
+                                    </Message>):(
+                                        <div className="overflow-x-auto">
+                                            <table className="min-w-full divide-y divide-gray-200">
+                                                <thead className="bg-gray-50">
+                                                     <tr>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">
+                                                             ID
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">
+                                                             DATE
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">
+                                                             TOTAL
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">
+                                                             PAID
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">
+                                                             DELIVERED
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">
+                                                             
+                                                        </th>
+
+                                                     </tr>
+                                                </thead>
+                                                 <tbody className="bg-white divide-y divide-y-200">
+                                                    {
+                                                        orders.map((order) => (
+                                                            <tr key={order._id}>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    {order._id}
+                                                                </td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    {order.createdAt.substring(0,10)}
+                                                                </td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    {order.totalPrice}
+                                                                </td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    {order.isPaid ? (order.paidAt.substring(0,10)):(<FaTimes className="text-red-500" />)}
+                                                                </td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    {order.isDelivered ? (
+                                                                        order.deliveredAt.substring(0,10)
+                                                                    ):(
+                                                                        <FaTimes className="text-red-500" />
+                                                                    )}
+                                                                </td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    <Link
+                                                                     to={`/order/${order._id}`}
+                                                                     className="text-primary hover:text-secondary"
+                                                                    >
+                                                                       <FaEye size={20} />
+                                                                    </Link>
+                                                                </td>
+
+                                                            </tr>
+                                                        ))
+                                                    }
+
+                                                 </tbody>
+                                            </table>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                )
+        }
     </div>
   )
 }
