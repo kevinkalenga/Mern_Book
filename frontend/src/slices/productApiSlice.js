@@ -52,9 +52,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Product'],
         }),
-
-        
-
+         
     })
 });
 
@@ -62,8 +60,8 @@ export const {
     useGetProductsQuery,
     useCreateProductMutation,
     useGetProductDetailsQuery,
-    useUpdateProductMutation,
     useDeleteProductMutation,
     useCreateReviewMutation,
+    
    
 } = productsApiSlice;
