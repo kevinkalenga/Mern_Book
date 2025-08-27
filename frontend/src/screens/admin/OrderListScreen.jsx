@@ -22,30 +22,30 @@ function OrderListScreen() {
                <table className="min-w-full bg-white border border-gray-200">
                   <thead className="bg-gray-50">
                      <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text- uppercase tracking-wider">
                               ID
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray uppercase tracking-wider">
                               USER
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray uppercase tracking-wider">
                               DATE
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray uppercase tracking-wider">
                               TOTAL
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray uppercase tracking-wider">
                               PAID
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray uppercase tracking-wider">
                               DELIVERED
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray uppercase tracking-wider">
                               ACTIONS
                         </th>
                      </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="divide-y divide-gray-200">
                      {
                       orders.map((order) => (
                          <tr key={order._id}>
@@ -62,7 +62,7 @@ function OrderListScreen() {
                                   $ {order.totalPrice}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                  $ {order.isPaid ? (order.paidAt.substring(0, 10)) : (
+                                   {order.isPaid ? (order.paidAt.substring(0, 10)) : (
                                      <FaTimes className="text-red-500" />
                                   )}
                             </td>
