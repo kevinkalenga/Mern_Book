@@ -40,7 +40,10 @@ function HomeScreen() {
         </Message>
       ) : (
         <div className="px-4 py-6">
-          <SearchBox onSearch={handleSearch} />
+          <SearchBox 
+             keyword={keyword}
+             setKeyword={setKeyword}
+            onSearch={handleSearch} />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {data?.products?.map((product) => (
               <Product key={product._id} product={product} />
