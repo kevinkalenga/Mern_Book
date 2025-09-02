@@ -131,16 +131,23 @@ function ProductScreen() {
                                     {
                                         product.reviews.map((review) => (
                                             <div className="bg-white p-6 rounded-lg shadow-sm" key={review._id}>
-                                               <div className="flex items-center space-x-4">
+                                               <div className="flex items-center space-x-1">
                                                   <strong className="text-gray-900">
                                                      {review.name}
                                                   </strong>
-                                                  <Rating value={review.rating} />
+                                                    <Rating value={Math.round(Number(review.rating) * 10) / 10} />
+
+
                                                   <p className="text-sm text-gray-500">
                                                     {review.createdAt.substring(0,10)}
+                                                    
                                                   </p>
+                                                  <p className="text-sm text-gray-500">
+                                                    {new Date(review.createdAt).toLocaleTimeString()} {/* Affiche date + heure */}
+                                                 </p>
                                                </div>
                                                <p className="mt-2 text-gray-700">{review.comment}</p>
+                                               
                                             </div>
                                         ))
                                     }

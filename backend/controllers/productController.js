@@ -158,6 +158,7 @@ const createProductReview = asyncHandler(async (req, res) => {
         // Mettre à jour le review existant
         existingReview.rating = Number(rating);
         existingReview.comment = comment;
+        existingReview.createdAt = new Date(); // ← mise à jour de la date
         await product.save();
 
         // Recalculer la note moyenne
@@ -176,6 +177,7 @@ const createProductReview = asyncHandler(async (req, res) => {
         rating: Number(rating),
         comment,
         user: req.user._id,
+        createdAt: new Date(),
     };
 
     product.reviews.push(review);
@@ -187,7 +189,24 @@ const createProductReview = asyncHandler(async (req, res) => {
         product.reviews.length;
 
     await product.save();
-    res.status(201).json({ message: 'Review added', product });
+    
+    const populatedProduct = await Product.findById(product._id)
+    .populate("reviews.user", "name");
+
+    // arrondir rating à 1 décimale pour chaque review
+   populatedProduct.reviews = populatedProduct.reviews.map((rev) => ({
+    ...rev.toObject(),
+    rating: Math.round(Number(rev.rating) * 10) / 10
+  }));
+
+  populatedProduct.rating = Math.round(Number(populatedProduct.rating) * 10) / 10;
+    
+    
+    res.status(201).json({
+         success: true,
+         product: populatedProduct,
+         message: existingReview ? "Review updated" : "Review added"
+     });
 });
 
 
