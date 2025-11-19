@@ -6,6 +6,7 @@ import validator from 'validator'
 // sign in user 
 
 const authUser = asyncHandler(async(req, res) => {
+    // console.log(req.body)
     const {email, password} = req.body;
 
     const user = await User.findOne({email})
@@ -199,7 +200,7 @@ const updateUser = asyncHandler(async (req, res) => {
     // Si c'est un admin et que tu veux empêcher sa rétrogradation
     if (user.isAdmin && req.body.isAdmin === false) {
         res.status(400);
-        throw new Error("Cannot remove admin privileges from this user");
+        throw new Error("Can not remove admin privileges from this user");
     }
 
     // Mise à jour des champs

@@ -48,12 +48,13 @@ function OrderScreen() {
         try {
             await payOrder({
                 orderId, 
-                details: {
-                paypalId: details.id,
-                status: details.status,
-                update_time: details.update_time,
-                email_address: details.payer.email_address
-        }
+                paypalId: details.id, 
+            //     details: {
+            //     paypalId: details.id,
+            //     status: details.status,
+            //     update_time: details.update_time,
+            //     email_address: details.payer.email_address
+            //  }
 
             }).unwrap();
             await refetch();
@@ -118,7 +119,7 @@ function OrderScreen() {
                         </Message>
                       )}
                 </div>
-                   <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+ <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
     <h2 className="text-2xl font-semibold text-gray-800 mb-4">
         Payment Method
     </h2>

@@ -135,7 +135,7 @@ function LoginScreen() {
         </form>
         <div className="py-3">
            <p>
-            Already hace an account ?{" "} <Link className="text-primary hover:text-secondary" to={redirect ? `/login?redirect=${redirect}`:'/login' }>
+            Already have an account ?{" "} <Link className="text-primary hover:text-secondary" to={redirect ? `/login?redirect=${redirect}`:'/login' }>
                Login
             </Link>
            </p>
