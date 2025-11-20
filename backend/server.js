@@ -105,11 +105,11 @@ app.get("/api/config/paypal", (req, res) =>
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
-// Serve frontend in production
+// Serve frontend in production (Vite build)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-  // Catch-all middleware for React Router
+  // Catch-all middleware pour React Router
   app.use((req, res, next) => {
     if (!req.path.startsWith('/api')) {
       res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
@@ -118,6 +118,7 @@ if (process.env.NODE_ENV === 'production') {
     }
   });
 } else {
+  // Route test rapide en dev
   app.get('/', (req, res) => res.send('API is running...'));
 }
 
@@ -126,5 +127,3 @@ app.use(notFound);
 app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server is running on port ${port}!!!`));
-
-
