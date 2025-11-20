@@ -107,7 +107,7 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // Serve frontend in production (Vite build)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
   // Catch-all middleware pour React Router
   app.use((req, res, next) => {
