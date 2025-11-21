@@ -9,9 +9,9 @@
     "server": "nodemon server.js",
     "client-install": "npm install --prefix ../frontend",
     "client-build": "npm run build --prefix ../frontend",
+    "postinstall": "npm install --prefix ../frontend && npm run build --prefix ../frontend",
     "build": "npm install && npm run client-install && npm run client-build",
     "dev": "concurrently \"npm run server\" \"npm start --prefix frontend\"",
-    "postinstall": "npm run client-install && npm run client-build",
     "data:import": "node ./seeder.js",
     "data:destroy": "node ./seeder.js -d"
   },
