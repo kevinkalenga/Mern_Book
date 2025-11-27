@@ -11,6 +11,7 @@ import LoginScreen from './screens/LoginScreen.jsx'
 import RegisterScreen from './screens/RegisterScreen.jsx'
 import CartScreen from './screens/CartScreen.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx'
+import Invoice from './components/invoice.jsx'
 import ShippingScreen from './screens/ShippingScreen.jsx'
 import PaymentScreen from './screens/PaymentScreen.jsx'
 import PlaceOrderScreen from './screens/PlaceOrderScreen.jsx'
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
                   <Route path='/payment' element={<PaymentScreen />} />
                   <Route path='/placeorder' element={<PlaceOrderScreen />} />
                   <Route path='/order/:id' element={<OrderScreen />} />
+                  <Route path='/order/:id/invoice' element={<Invoice />} />
                   <Route path='/profile' element={<ProfileScreen />} />
               </Route>
               <Route path='' element={<AdminRoute />}>

@@ -175,6 +175,15 @@ function OrderScreen() {
              <div className="md:col-span-1">
                 <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                      <h2 className="text-2xl font-semibold text-gray-800 mb-6">Order Summary</h2>
+                     <div className="mt-6">
+                       <Link
+                         to={`/order/${order._id}/invoice`}
+                         className="w-full inline-block text-center bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors"
+                       >
+                         View Invoice
+                       </Link>
+                     </div>
+
                      <div className="space-y-4">
                         <div className="flex justify-between">
                            <span className="text-gray-600">Items</span>
