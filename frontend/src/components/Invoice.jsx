@@ -117,52 +117,45 @@ const Invoice = () => {
           <thead>
             <tr className="bg-gray-200 text-left">
               <th className="p-2">Product</th>
+              <th className="p-2">Name</th>
               <th className="p-2 text-center">Qty</th>
               <th className="p-2 text-right">Price</th>
               <th className="p-2 text-right">Total</th>
             </tr>
           </thead>
 
-          <tbody className="text-right">
-            {orderItems.map((item) => (
-              <tr key={item.product} className="border-b hover:bg-gray-50">
-                <td className="p-2">{item.name}</td>
-                <td className="p-2 text-center">{item.qty}</td>
-                <td className="p-2 text-right">${item.price.toFixed(2)}</td>
-                <td className="p-2 text-right">
-                  ${(item.qty * item.price).toFixed(2)}
-                </td>
-              </tr>
-            ))}
+              <tbody className="text-right">
+  {orderItems.map((item) => (
+    <tr key={item.product} className="border-b hover:bg-gray-50">
+      <td className="px-6 py-3 text-left text-xs font-medium text- uppercase tracking-wider">{item.product}</td>          {/* Product ID */}
+      <td className="px-6 py-3 text-left text-xs font-medium text- uppercase tracking-wider">{item.name}</td>             {/* Name */}
+      <td className="px-6 py-3 text-left text-xs font-medium text- uppercase tracking-wider ">{item.qty}</td>  {/* Qty */}
+      <td className="px-6 py-3 text-left text-xs font-medium text- uppercase tracking-wider">${item.price.toFixed(2)}</td> {/* Price */}
+      <td className="px-6 py-3 text-left text-xs font-medium text- uppercase tracking-wider">${(item.qty * item.price).toFixed(2)}</td> {/* Total */}
+    </tr>
+  ))}
 
-            <tr>
-              <td colSpan="3" className="p-2 font-semibold text-right">
-                Subtotal:
-              </td>
-              <td className="p-2">${itemsPrice.toFixed(2)}</td>
-            </tr>
+  <tr>
+    <td colSpan="4" className="p-2 font-semibold text-right">Subtotal:</td>
+    <td className="p-2">${itemsPrice.toFixed(2)}</td>
+  </tr>
 
-            <tr>
-              <td colSpan="3" className="p-2 font-semibold text-right">
-                Tax:
-              </td>
-              <td className="p-2">${taxPrice.toFixed(2)}</td>
-            </tr>
+  <tr>
+    <td colSpan="4" className="p-2 font-semibold text-right">Tax:</td>
+    <td className="p-2">${taxPrice.toFixed(2)}</td>
+  </tr>
 
-            <tr>
-              <td colSpan="3" className="p-2 font-semibold text-right">
-                Shipping:
-              </td>
-              <td className="p-2">${shippingPrice.toFixed(2)}</td>
-            </tr>
+  <tr>
+    <td colSpan="4" className="p-2 font-semibold text-right">Shipping:</td>
+    <td className="p-2">${shippingPrice.toFixed(2)}</td>
+  </tr>
 
-            <tr className="bg-gray-100">
-              <td colSpan="3" className="p-2 font-bold text-right">
-                Total:
-              </td>
-              <td className="p-2 font-bold">${totalPrice.toFixed(2)}</td>
-            </tr>
-          </tbody>
+  <tr className="bg-gray-100">
+    <td colSpan="4" className="p-2 font-bold text-right">Total:</td>
+    <td className="p-2 font-bold">${totalPrice.toFixed(2)}</td>
+  </tr>
+</tbody>
+
         </table>
 
         {/* Footer */}

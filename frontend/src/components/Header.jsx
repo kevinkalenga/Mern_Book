@@ -107,7 +107,7 @@ function Header() {
                   hover:bg-gray-100 hover:text-black transition-all 
                   p-1 max-mid:mx-2"
               >
-                {userInfo.name.split(' ')[0]}
+                
                 <FaChevronDown className="mt-0.5" />
               </button>
 
