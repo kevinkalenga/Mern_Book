@@ -39,7 +39,7 @@ function HomeScreen() {
           {error?.data?.message || error.error}
         </Message>
       ) : (
-        <div className="px-4 py-6">
+        <div className="px-6 py-6">
           <SearchBox 
              keyword={keyword}
              setKeyword={setKeyword}
